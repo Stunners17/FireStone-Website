@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Order Coal</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <header class="header">
+      <h1> FireStone Coal </h1>
+    </header>
+
+
+        <div id="tabs-top2">
+            <a href="index.html">Back</a>
+     </div>
+
+
+        <section class="order">
+            <h2>Your order</h2>
+            <p>Fill in the form below to place your order.</p>
+
+            <form 
+               id="orderform"
+               action="https://formspree.io/f/mlglglwo" 
+               method="POST"
+
+            >
+                <label>First Names</label>
+                <input 
+                type="text"
+                name="first names" 
+                placeholder="Your first names" 
+                required
+                >
+
+                <label>Last Name</label>
+                <input 
+                type="text" 
+                name="last name"
+                placeholder="Your last name" 
+                required
+                >
+
+                <label>Address</label>
+                <input 
+                type="text" 
+                placeholder="e.g 70Sekhu st" 
+                required
+                >
+
+                <label>type of order</label>
+                <input 
+                  type="text" 
+                  name="coalType"
+                  placeholder="e.g 50kg sack or 18.40kg" 
+                >
+                
+                <label>Specials</label>
+                <input 
+                  type="text" 
+                  name="specials"
+                  placeholder="e.g 3x18.40kg or 50kg sack special"
+                >
+
+                <label>Quantity (Sacks) </label>
+                <input 
+                  type="number" 
+                  name="quantity"
+                  min="1" 
+                  placeholder="e.g 2" 
+                  required
+                >
+                <label>Contact Number</label>
+                <input 
+                  type="tel" 
+                  name="contactNumber"
+                  placeholder="e.g 0781234567" 
+                  required
+                >
+                <label>Time of Collection</label>
+                <input 
+                  type="time" 
+                  name="collectionTime"
+                  required
+                >
+
+                <label for="deliveryOption">Choose Delivery or Pickup:</label>
+                <select id="deliveryOption" name="orderType" required>
+                    <option value="">Select option</option>
+                    <option value="delivery" required>Delivery</option>
+                    <option value="pickup" required="">Pickup</option>
+                </select>
+
+                <button type="submit">Submit Order</button>
+            </form>
+
+        <script>
+            const form = document.getElementById('orderform');
+            form.addEventListener('submit', function () {
+                const option = document.getElementById('deliveryOption').value;
+
+                if(option === 'pickup') {
+                    window.location="pickup-confirmation.html"
+                } else if(option === 'delivery') {
+                    //redirect after form is submitted
+                    form.action="https://formspree.io/f/mlglglwo";
+                    setTimeout(function(e) {
+                        window.location.href ="comingsoon.html";
+                    }, 500);
+                }
+                else {
+                    alert('Please select a delivery or pickup option.');
+                }
+            });
+            
+        </script>
+
+        </section>
+
+
+        <footer>
+            <p> 2026 Coal Supplier</p>
+        </footer>
+
+
+
+        
+    </body>
+</html>
