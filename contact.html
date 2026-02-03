@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FireStone Coal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a, #444);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info h2,
+        .contact-form h2 {
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item strong {
+            color: #8B4513;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8B4513;
+            box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+        }
+
+        button {
+            background-color: #8B4513;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a0522d;
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Contact FireStone Coal</h1>
+            <p>Get in touch with us today</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="contact-wrapper">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <div class="info-item">
+                    <strong>Address</strong>
+                    <p>70 SEKHU STREET<br>ATTERIDGEVILLE,PRETORIA 0008</p>
+                </div>
+                <div class="info-item">
+                    <strong>Phone</strong>
+                    <p><a href="tel:+27769823253" style="color: #8B4513; text-decoration: none;">+27769823253</a></p>
+                </div>
+                <div class="info-item">
+                    <strong>Email</strong>
+                    <p><a href="mailto:ntando.lawrance@gmail.com" style="color: #8B4513; text-decoration: none;">ntando.lawrance@gmail.com</a></p>
+                </div>
+                <div class="info-item">
+                    <strong>Hours</strong>
+                    <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <section class="contact-form">
+                <h2>Send us a Message</h2>
+                <form
+                   id="form-group"
+                   action="https://formspree.io/f/mlglglwo"
+                   method="POST"
+
+                >
+                <div class="form-group">
+
+                    <label for="name">Name</label>
+                    <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required
+                    >
+                        
+                
+                    <label for="email">Email</label>
+                    <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required
+                    >
+                        
+                        
+                    <label for="phone">Phone</label>
+                    <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone"
+                    >
+                    
+                    <label for="message">Message</label>
+                    <textarea 
+                    id="message" 
+                    name="message" 
+                    required
+                    ></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+          const feedbackForm = document.getElementById('form-group');
+
+          feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+                fetch(feedbackForm.action, {
+                    method: 'POST',
+                    body: new FormData(form-group),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(() => {
+                    window.location ="message-recieved.html";
+                });
+            });
+        </script>
+
+    </body>
+</html>
