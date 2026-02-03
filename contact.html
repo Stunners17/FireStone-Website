@@ -206,30 +206,113 @@
                     ></textarea>
                 </div>
 
-                <button type="submit">Send Message</button>
+                    <button type="submit" class="button">
+                        Send Message
+                    </button>
 
                 </form>
             </div>
         </div>
     </div>
 
+
+
     <script>
-          const feedbackForm = document.getElementById('form-group');
+        // Form validation and handling
+        const form = document.getElementById('form-group');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const messageInput = document.getElementById('message');
 
-          feedbackForm.addEventListener('submit', function(e) {
-            e.preventDefault(); 
+        // Validate email format
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
-                fetch(feedbackForm.action, {
-                    method: 'POST',
-                    body: new FormData(form-group),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(() => {
-                    window.location ="message-recieved.html";
-                });
+        // Validate phone format (optional field)
+        function isValidPhone(phone) {
+            if (!phone) return true; // Phone is optional
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 10;
+        }
+
+        // Add real-time validation feedback
+        nameInput.addEventListener('blur', function() {
+            if (this.value.trim().length < 2) {
+                this.style.borderColor = '#d32f2f';
+            } else {
+                this.style.borderColor = '#ddd';
+            }
+        });
+
+        emailInput.addEventListener('blur', function() {
+            if (!isValidEmail(this.value)) {
+                this.style.borderColor = '#d32f2f';
+            } else {
+                this.style.borderColor = '#ddd';
+            }
+        });
+
+        phoneInput.addEventListener('blur', function() {
+            if (!isValidPhone(this.value)) {
+                this.style.borderColor = '#d32f2f';
+            } else {
+                this.style.borderColor = '#ddd';
+            }
+        });
+
+        messageInput.addEventListener('blur', function() {
+            if (this.value.trim().length < 10) {
+                this.style.borderColor = '#d32f2f';
+            } else {
+                this.style.borderColor = '#ddd';
+            }
+        });
+
+        // Form submission with validation
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate all fields
+            let isValid = true;
+
+            if (nameInput.value.trim().length < 2) {
+                nameInput.style.borderColor = '#d32f2f';
+                isValid = false;
+            }
+
+            if (!isValidEmail(emailInput.value)) {
+                emailInput.style.borderColor = '#d32f2f';
+                isValid = false;
+            }
+
+            if (!isValidPhone(phoneInput.value)) {
+                phoneInput.style.borderColor = '#d32f2f';
+                isValid = false;
+            }
+
+            if (messageInput.value.trim().length < 10) {
+                messageInput.style.borderColor = '#d32f2f';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                alert('Please fill in all fields correctly.');
+                return;
+            }
+
+            // Submit the form to Formspree
+            this.submit();
+        });
+
+        // Clear error styling on input
+        [nameInput, emailInput, phoneInput, messageInput].forEach(input => {
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#ddd';
             });
-        </script>
-
+        });
+    </script>
     </body>
 </html>
