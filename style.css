@@ -1,7 +1,15 @@
+html {
+    height: 100%;
+}
+
 body {
-    margin:0;
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     background-color: #9a9696;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -200,12 +208,16 @@ section {
     margin-bottom: 100px;
     background: white;
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 0;
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1;
 }
 
 .about-content {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .about-content h2 {
@@ -349,6 +361,231 @@ textarea{
 }
 .price-card.special li strong{
     color: #d35400;
+}
+
+/* Core Values Section */
+.values-section {
+    margin-top: 50px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+    border-radius: 8px;
+}
+
+.values-section h2 {
+    color: #ff6a00;
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #ff6a00;
+    padding-bottom: 15px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+    margin: 0;
+}
+
+.value-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 5px solid #ff6a00;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 106, 0, 0.2);
+}
+
+.value-card h4 {
+    color: #ff6a00;
+    margin-top: 0;
+    font-size: 1.3em;
+}
+
+.value-card p {
+    color: #666;
+    font-size: 0.95em;
+    max-height: 100px;
+    opacity: 1;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.value-card.expanded p {
+    max-height: 300px;
+}
+
+.toggle-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5em;
+    color: #ff6a00;
+    transition: transform 0.3s ease;
+}
+
+.value-card.expanded .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Timeline Section */
+.timeline-section {
+    margin-top: 50px;
+    padding: 40px 20px;
+}
+
+.timeline-section h2 {
+    color: #ff6a00;
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #ff6a00;
+    padding-bottom: 15px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background: #ff6a00;
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+}
+
+.timeline-item:nth-child(odd) {
+    margin-left: 0;
+    margin-right: 50%;
+    padding-right: 40px;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: 50%;
+    margin-right: 0;
+    padding-left: 40px;
+    text-align: left;
+}
+
+.timeline-date {
+    display: inline-block;
+    background: #ff6a00;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #ff6a00;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h4 {
+    color: #ff6a00;
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.timeline-content p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* CTA Section */
+.cta-section {
+    margin-top: 50px;
+    padding: 40px;
+    background: linear-gradient(135deg, #ff6a00, #ff8c3a);
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+
+.cta-section h3 {
+    color: white;
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+}
+
+.cta-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1em;
+    margin: 0 0 20px 0;
+}
+
+.primary-btn {
+    background: white !important;
+    color: #ff6a00 !important;
+    font-weight: bold;
+    padding: 15px 35px !important;
+    border-radius: 30px !important;
+    transition: all 0.3s ease !important;
+}
+
+.primary-btn:hover {
+    background: #f0f0f0 !important;
+    transform: scale(1.05) !important;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive timeline */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 80px;
+        padding-right: 0;
+        text-align: left;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+}
 }
 
 .price-note p{

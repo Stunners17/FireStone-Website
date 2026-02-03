@@ -33,6 +33,75 @@
                 <h3>Our Legacy</h3>
                 <p>Today we are proud to continue the legacy, supplying coal to local households and businesses, and remaining rooted in the community that supported us from the beginning.</p>
             </div>
+
+            <!-- Core Values Section -->
+            <div class="values-section">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card" onclick="toggleValue(this)">
+                        <h4>Quality</h4>
+                        <p>We guarantee the highest quality coal products for our customers.</p>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="value-card" onclick="toggleValue(this)">
+                        <h4>Sustainability</h4>
+                        <p>Environmental responsibility is at the heart of our operations.</p>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="value-card" onclick="toggleValue(this)">
+                        <h4>Trust</h4>
+                        <p>We build lasting relationships based on honesty and integrity.</p>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="value-card" onclick="toggleValue(this)">
+                        <h4>Community</h4>
+                        <p>Supporting the local community is central to who we are.</p>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <div class="timeline-section">
+                <h2>Our Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2010</div>
+                        <div class="timeline-content">
+                            <h4>Founded by Grace Mnguni</h4>
+                            <p>FireStone Coal is established with a vision for quality and sustainability.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2015</div>
+                        <div class="timeline-content">
+                            <h4>Expansion</h4>
+                            <p>We expand our operations and reach more communities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-content">
+                            <h4>Sustainability Initiative</h4>
+                            <p>Launch of environmental responsibility programs and partnerships.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026</div>
+                        <div class="timeline-content">
+                            <h4>Today</h4>
+                            <p>Continuing our legacy of quality, trust, and community service.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="cta-section">
+                <h3>Ready to Experience Quality Coal?</h3>
+                <p>Get in touch with us today for reliable coal delivery</p>
+                <a href="contact.html" class="btn primary-btn">Contact Us Now</a>
+            </div>
         </section>
     </div>
 
@@ -40,5 +109,34 @@
         <a href="index.html">HOME</a>
         <a href="feedback.html">FEEDBACK</a>
     </div>
+
+    <script>
+        // Toggle value cards
+        function toggleValue(element) {
+            element.classList.toggle('expanded');
+            const icon = element.querySelector('.toggle-icon');
+            icon.textContent = element.classList.contains('expanded') ? '−' : '+';
+        }
+
+        // Smooth scroll effect on page load
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('.about-section');
+            sections.forEach((section, index) => {
+                section.style.animation = `slideIn 0.6s ease-out ${index * 0.1}s forwards`;
+                section.style.opacity = '0';
+            });
+        });
+
+        // Add animation to timeline items on scroll
+        window.addEventListener('scroll', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.75) {
+                    item.classList.add('visible');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
