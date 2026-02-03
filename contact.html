@@ -228,78 +228,64 @@
         // Validate email format
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+            return emailRegex.test(email.trim());
         }
-
-        // Validate phone format (optional field)
-        function isValidPhone(phone) {
-            if (!phone) return true; // Phone is optional
-            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-            return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 10;
-        }
-
-        // Add real-time validation feedback
-        nameInput.addEventListener('blur', function() {
-            if (this.value.trim().length < 2) {
-                this.style.borderColor = '#d32f2f';
-            } else {
-                this.style.borderColor = '#ddd';
-            }
-        });
-
-        emailInput.addEventListener('blur', function() {
-            if (!isValidEmail(this.value)) {
-                this.style.borderColor = '#d32f2f';
-            } else {
-                this.style.borderColor = '#ddd';
-            }
-        });
-
-        phoneInput.addEventListener('blur', function() {
-            if (!isValidPhone(this.value)) {
-                this.style.borderColor = '#d32f2f';
-            } else {
-                this.style.borderColor = '#ddd';
-            }
-        });
-
-        messageInput.addEventListener('blur', function() {
-            if (this.value.trim().length < 10) {
-                this.style.borderColor = '#d32f2f';
-            } else {
-                this.style.borderColor = '#ddd';
-            }
-        });
 
         // Form submission with validation
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Validate all fields
+            // Validate all required fields
             let isValid = true;
+            let errorMessage = 'Please check the following:\n';
 
+            // Validate name (required, at least 2 characters)
             if (nameInput.value.trim().length < 2) {
                 nameInput.style.borderColor = '#d32f2f';
+                errorMessage += '• Name must be at least 2 characters\n';
                 isValid = false;
+            } else {
+                nameInput.style.borderColor = '#ddd';
             }
 
-            if (!isValidEmail(emailInput.value)) {
+            // Validate email (required, valid format)
+            if (!emailInput.value.trim()) {
                 emailInput.style.borderColor = '#d32f2f';
+                errorMessage += '• Email is required\n';
                 isValid = false;
+            } else if (!isValidEmail(emailInput.value)) {
+                emailInput.style.borderColor = '#d32f2f';
+                errorMessage += '• Email format is invalid\n';
+                isValid = false;
+            } else {
+                emailInput.style.borderColor = '#ddd';
             }
 
-            if (!isValidPhone(phoneInput.value)) {
-                phoneInput.style.borderColor = '#d32f2f';
-                isValid = false;
+            // Validate phone (optional, but if filled must be valid)
+            if (phoneInput.value.trim()) {
+                const phoneOnly = phoneInput.value.replace(/\D/g, '');
+                if (phoneOnly.length < 10) {
+                    phoneInput.style.borderColor = '#d32f2f';
+                    errorMessage += '• Phone must have at least 10 digits\n';
+                    isValid = false;
+                } else {
+                    phoneInput.style.borderColor = '#ddd';
+                }
+            } else {
+                phoneInput.style.borderColor = '#ddd';
             }
 
-            if (messageInput.value.trim().length < 10) {
+            // Validate message (required, at least 5 characters)
+            if (messageInput.value.trim().length < 5) {
                 messageInput.style.borderColor = '#d32f2f';
+                errorMessage += '• Message must be at least 5 characters\n';
                 isValid = false;
+            } else {
+                messageInput.style.borderColor = '#ddd';
             }
 
             if (!isValid) {
-                alert('Please fill in all fields correctly.');
+                alert(errorMessage);
                 return;
             }
 
