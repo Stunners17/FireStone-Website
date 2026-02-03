@@ -96,47 +96,41 @@
             </form>
 
         <script>
-          (function () {
+          (function() {
             const form = document.getElementById('orderform');
-            const deliverySelect = document.getElementById('deliveryOption');
-
             form.addEventListener('submit', function (e) {
               e.preventDefault();
-              const option = deliverySelect.value;
+              const option = document.getElementById('deliveryOption').value;
 
-              if (!option) {
+              if(!option) {
                 alert('Please select a delivery or pickup option.');
                 return;
               }
 
-              if (option === 'pickup') {
-                // If pickup chosen, redirect to pickup confirmation page
-                // (Do not submit to external form endpoint)
-                window.location.href = 'pickup-confirmation.html';
-                return;
-              }
+              const actionUrl = form.action;
+              const formData = new FormData(form);
 
-              if (option === 'delivery') {
-                // For delivery, submit form data to the configured action via fetch,
-                // then redirect to comingsoon.html when done (or on error).
-                const action = form.action;
-                const method = (form.method || 'POST').toUpperCase();
-                const formData = new FormData(form);
-
-                fetch(action, {
-                  method: method,
-                  body: formData,
-                  headers: {
-                    'Accept': 'application/json'
+              fetch(actionUrl, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'Accept': 'application/json'
+                }
+              }).then(function(response) {
+                if (response.ok) {
+                  if(option === 'pickup') {
+                    window.location.href = 'pickup-confirmation.html';
+                  } else {
+                    window.location.href = 'comingsoon.html';
                   }
-                }).then(function (response) {
-                  // Regardless of response, go to coming soon / delivery page
-                  window.location.href = 'comingsoon.html';
-                }).catch(function (err) {
-                  console.error('Form submit error:', err);
-                  window.location.href = 'comingsoon.html';
-                });
-              }
+                } else {
+                  return response.json().then(function() {
+                    alert('Submission failed — please try again.');
+                  });
+                }
+              }).catch(function() {
+                alert('Network error — please try again.');
+              });
             });
           })();
         </script>
