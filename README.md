@@ -1,2 +1,3 @@
 # FireStone Website
-this is my first website 
+A Static Business Website For A Local coal Supplier, built with HTML, CSS, And JavaScrit.
+Includes Order And Feedback Form With Email Notification.
