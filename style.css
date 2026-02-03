@@ -639,6 +639,40 @@ form input:focus, form select:focus, form textarea:focus{
     box-shadow: 0 0 5px rgba(173, 78, 10, 0.945);
 }
 
+/* Unavailable label styling */
+.unavailable {
+    background-color: #d32f2f;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.unavailable-card {
+    opacity: 0.65;
+    position: relative;
+}
+
+.unavailable-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(211, 47, 47, 0.1) 10px,
+        rgba(211, 47, 47, 0.1) 20px
+    );
+    border-radius: 8px;
+    pointer-events: none;
+}
+
 /* Accessibility: focus styles for navigation and buttons */
 #tabs-top a:focus, #tabs-bottom a:focus, .btn:focus {
     outline: 3px solid #ff6a00;
