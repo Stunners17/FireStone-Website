@@ -36,11 +36,11 @@ body {
       border-radius: 2px;
       color: #fdfcfc;
       text-decoration: none;
-      padding: 1.4px;
+      padding: 2px;
 }
 
 #tabs-top2 a:hover{
-      padding: 1px;
+      padding: 2px;
       background-color: gainsboro;
       color: #ff6a00;
 }
